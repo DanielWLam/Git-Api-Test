@@ -1,19 +1,25 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $.ajax({
-    url: 'https://api.github.com/users/DanielWLam',
-    type: 'GET',
+    url: 'https://api.github.com/users/repos',
+    type: 'POST',
     headers: {
-      Accept: 'application/vnd.github.v3+json'
+      Accept: 'application/vnd.github.v3+json',
       // Authorization: 'bearer 93a2fab04d92377cd40ff3a64a0e97d6ac53eacd'
     },
-    // data: {
-    //   query: JSON.stringify({"query": "{viewer {login name}}"})
-    // },
-    success: function (res) {
-      console.log(res)
+    data: {
+      name: 'Hello-test-create',
+      description: 'This is your first repository',
+      homepage: 'https://github.com',
+      private: false,
+      has_issues: true,
+      has_projects: true,
+      has_wiki: true,
     },
-    error: function (err) {
-      console.log(err)
-    }
-  })
-})
+    success(res) {
+      console.log(res);
+    },
+    error(err) {
+      console.log(err);
+    },
+  });
+});

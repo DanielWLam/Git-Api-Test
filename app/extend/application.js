@@ -14,14 +14,14 @@ module.exports = {
   //       });
   //   });
   // },
-  $post(url, data) {
+  $post(url, data, headers) {
     return new Promise((resolve, reject) => {
       axios
-        .post(url, data, {
+        .post(url, data, Object.assign({}, {
           headers: {
-            Accept: 'application/json',
-          },
-        })
+            Accept: 'application/json'
+          }
+        }, headers))
         .then(res => {
           resolve(res);
         })

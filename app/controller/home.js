@@ -38,16 +38,16 @@ module.exports = app => {
       result = result.data
       console.log(result, '===')
       let access_token = result.access_token;
-      let authResult
-      if (this.hasScope(result.scope, 'user')) {
-        authResult = yield app.$get('https://api.github.com/user', {
-          headers: {
-            "Authorization": `${result.token_type} ${access_token}`
+      let createRepo = yield app.$post('https://api.github.com/user/repos', {
+        name: 'createFromAPI',
+        description: 'hhhh',
+      }, {
+           headers: {
+             "Authorization": `${result.token_type} ${access_token}`
           }
         })
-        console.log(authResult, '===')
-      }
-      ctx.body = authResult.data;
+      console.log(createRepo.data)
+      ctx.body = createRepo.data
     }
     hasScope(str, scope) {
       return str.indexOf(scope) > -1;
